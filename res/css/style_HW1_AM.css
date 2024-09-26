@@ -1,0 +1,166 @@
+* {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    /*
+       CSS comment
+       The box-sizing CSS property sets how the total width and height of an element are calculated.
+       If you set box-sizing: border-box; on an element, padding, and border are included in the width and height:
+    */
+  }
+body {
+    line-height: 1.6;
+    margin: 0;
+     }
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+     /*
+       list-style: none = No marker is shown
+     */
+    }
+
+a {
+    color: #34495e;
+    text-decoration: none;
+     /*
+       text-decoration: none - is used here to not show underlining under an anchor element when a mouse hovers over it.
+       Comment it out and check the result on the page.
+     */
+    }
+
+.logo {
+    margin: 0;
+    font-size: 1.1em;
+      }
+
+section {
+    padding: 10px 15px;
+    margin: 10px;
+    display: block;
+        }
+.header {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border: 1px solid #646174;
+    background-color: #a2ccea;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    position: sticky;
+    width: 100%;
+
+    border-radius: 5px;
+}
+.nav {
+    margin-top: 5px;
+     }
+.nav {
+    margin-top: 5px;
+     }
+
+.nav a {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    text-align: left;
+    display: block;
+    color: #34495e;
+    font-size: .99em;
+       }
+.nav a:hover {
+    background-color: #7ebeb6;
+    color: #092747;
+             }
+@media (min-width: 800px) {
+    .header,
+    .nav {
+        display: flex;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media (min-width: 1000px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+.form-container > body {
+    display: grid;
+    place-items: center; /* Centers children both vertically and horizontally */
+    height: 100vh; /* Full height of viewport */
+    margin: 0; /* Remove default margins */
+}
+
+.centered-class {
+    /* Your desired styles for the centered class */
+    background-color: lightgrey; /* Example styling */
+    padding: 20px; /* Example styling */
+    border-radius: 5px; /* Example styling */
+    /* Other styles as needed */
+}
+
+.form-container {
+    background-color: darkgrey; /* Background color of the form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    width: auto; /* Set width to auto to fit content */
+    max-width: 300px; /* Limit maximum width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-group {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-group label {
+    width: 150px; /* Fixed width for labels */
+    margin-right: 10px; /* Space between the label and input */
+}
+
+textarea {
+    width: 100%; /* Full width for textarea */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    margin-bottom: 10px; /* Space below the textarea */
+    resize: none; /* To keep the textarea non-resizable */
+}
+
+/* Customize the file upload button */
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #646174; /* Adjust to your preferred color */
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+
+input[type="file"] {
+    display: none; /* Hide the default file input */
+}
+
+input[type="submit"] {
+    width: 100%; /* Make submit button full width */
+    padding: 10px; /* Add padding for better appearance */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #092747; /* Adjust as needed */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+input[type="submit"]:hover {
+    background-color: #34495e; /* Hover color for the submit button */
+}
