@@ -1,0 +1,88 @@
+
+* {
+    font-family: 'Verdana';
+}
+
+@media (min-width: 800px) {
+    .posts {
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+
+@media (max-width: 799px) {
+    .posts {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+#account:hover {
+    box-shadow: 2px 2px 5px #22c55e;
+}
+
+header {
+    height: auto;
+    display: flex;
+    font-size: 24px;
+    background-color: #0F172A;
+    justify-content: space-between;
+    margin: 0;
+    padding: 30px;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+}
+
+.headerDiv > a {
+    margin: 20px;
+    color: white;
+    text-decoration: none;
+}
+.headerDiv a:hover {
+    background-color: #22c55e;
+}
+
+.userImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+body {
+    margin: 0;
+}
+
+
+.post {
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 20px;
+}
+.postHeader ~ p {
+    font-size: 20px;
+}
+.postHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.postHeader+img {
+    border-radius: 20px;
+}
+.like {
+    width: 20px;
+}
+footer {
+    height: 100px;
+    background-color: #0F172A;
+}
