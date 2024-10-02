@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="res/images/Favicon.ico">
+    <title>Homework 1</title>
     <link rel="stylesheet" href="res/css/style_HW1_AM.css">
-    <title>Homework1_groupAM</title>
 </head>
+
 <body>
-<header class="header">
-    <ul class="nav">
-        <li><a href="index.html">Home</a></li>
-    </ul>
-    <a class="logo" href="#"><img src="res/images/me.png" width="50" height="50" alt="My picture"></a>
-</header>
+    <header>
+        <div class="headerDiv">
+            <a href="index.html">Home</a>
+        </div>
+        <div>
+            <a href="login.html">
+                <img class="userImage" id="account" src="res/images/me.png" alt="User image">
+            </a>
+        </div>
+    </header>
+
 </body>
 <br />
  <div class="form-container">
@@ -27,7 +32,7 @@
         <div class="form-group">
             <label for="fileUpload">Select file:</label>
             <label class="custom-file-upload">
-                Choose a file
+                Choose file
                 <input type="file" id="fileUpload" name="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
             </label>
         </div>
@@ -36,4 +41,3 @@
     </form>
     </div>
 </html>
-
