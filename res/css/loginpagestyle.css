@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.outer-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+.main-container{
+    background-color: lightgray;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    margin-bottom: 30%;
+    text-align: center;
+
+}
+
+.outer-container > .main-container {
+    border: 2px solid black
+}
+
+.main-upper-text{
+    margin-top: 20px;
+    text-align: center;
+}
+
+#main-heading{
+    font-size: larger;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+form input{
+    font-size: large;
+    width: 55%;
+    height: 50px;
+    border: none;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+form input::placeholder{
+color:lightslategrey;
+}
+
+form button{
+    font-size: large;
+    width: 35%;
+    height: 30px;
+    border: none;
+    background-color: #42adf5;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+form button:hover{
+    background-color: darkblue;
+    color: white;
+}
+a{
+    color: blue;
+    font-size: larger;   
+}
+p{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+h1 + *  + p {
+    font-style: italic;
+}
+
+h1 ~ p {
+    color: darkslategrey;
+} 
+
+@media (max-width: 768px) {
+    .main-container {
+        width: 90%;
+        margin-bottom: 10%;
+    }
+
+    form input, form button {
+        width: 80%;
+    }
+    form button {
+        width: 40%;
+    }
+}
+header a{
+    font-size: 24px;
+}
