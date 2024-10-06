@@ -35,7 +35,7 @@ body {
     margin: 0;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 400px) {
     .header,
     .nav {
         display: flex;
@@ -60,7 +60,7 @@ body {
 
 .centered-class {
     background-color: lightgrey; 
-    padding: 20px; 
+    padding: 10px; 
     border-radius: 5px; 
     
 }
@@ -70,7 +70,7 @@ body {
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    width: 40%; 
+    width: 60%; 
     box-sizing: border-box; 
     position: relative;
     top: 20px;
