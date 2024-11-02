@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //     })
 // });
 
-const LOCAL_JSON_PATH = "res/json/myjson.json";
+const LOCAL_JSON_PATH = "WAD-H1/res/json/myjson.json";
 
 //Potentially fixes the problem where github pages does not load
 async function loadJSON(){
