@@ -86,7 +86,6 @@ async function loadJSON() {
 
         if (window.location.pathname === '/WAD-H1/' || window.location.pathname === '/WAD-H1/index.html') {
             const postscontainer = document.getElementsByClassName('posts');
-            console.log(postscontainer);
             for (const postdata of json.posts) {
                 let post = document.createElement("div");
                 post.className = 'post';
@@ -124,8 +123,6 @@ async function loadJSON() {
 
 
                 postscontainer[0].appendChild(post);
-
-                console.log(postdata.imageUrl)
             }
         }
 
