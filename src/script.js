@@ -85,8 +85,9 @@ async function loadJSON(){
     try{
         const response = await fetch(LOCAL_JSON_PATH);
         const json = await response.json();
+        console.log(window.lo);
 
-        if(window.location.pathname === './index.html') {
+        if(window.location.pathname === '/WAD-H1/' || window.location.pathname === '/WAD-H1/index.html') {
             const postscontainer = document.getElementsByClassName('posts');
             console.log(postscontainer);
             for(const postdata of json.posts){
@@ -122,7 +123,7 @@ async function loadJSON(){
                 let like = document.createElement("img");
                 post.appendChild(like);
                 like.className = 'like';
-                like.src = 'res/images/like.png';
+                like.src = './res/images/like.png';
                 
                 
                 postscontainer[0].appendChild(post);
