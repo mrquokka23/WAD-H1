@@ -19,7 +19,7 @@
 }
 
 #account:hover {
-    box-shadow: 2px 2px 5px #22c55e;
+    box-shadow: 2px 2px 5px #3777bc;
 }
 
 header {
@@ -43,7 +43,7 @@ header div {
     text-decoration: none;
 }
 .headerDiv a:hover {
-    background-color: #22c55e;
+    background-color: #3777bc;
 }
 
 .userImage {
