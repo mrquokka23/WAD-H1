@@ -86,7 +86,7 @@ async function loadJSON(){
         const response = await fetch(LOCAL_JSON_PATH);
         const json = await response.json();
 
-        if(window.location.pathname === '/index.html') {
+        if(window.location.pathname === './index.html') {
             const postscontainer = document.getElementsByClassName('posts');
             console.log(postscontainer);
             for(const postdata of json.posts){
