@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const accountLink = document.getElementById('account-link');
     const dropdown = document.getElementById('dropdown');
 
-    // Toggle the dropdown menu on click
     accountLink.addEventListener('click', function (event) {
         event.preventDefault(); // Prevent anchor default behavior
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
