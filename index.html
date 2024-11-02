@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,10 +15,15 @@
             <a href="addPost.html">Add Post</a>
             <a href="login.html">Log in</a>
         </div>
-        <div>
-            <a href="login.html">
+        <div class="userDropdown">
+            <a href="#" id="account-link">
                 <img class="userImage" id="account" src="res/images/me.png" alt="User image">
             </a>
+            <div id="dropdown" class="dropdown-content">
+                <span id="username">John Doe</span>
+                <span id="email">john.doe@ut.ee</span>
+                <a href="#" id="logout">Logout</a>
+            </div>
         </div>
     </header>
 
@@ -98,6 +104,7 @@
     </div>
 
     <footer></footer>
+    <script src="src/script.js"></script>    
 </body>
 
 </html>

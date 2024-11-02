@@ -15,31 +15,40 @@
             <a href="addPost.html">Add Post</a>
             <a href="login.html">Log in</a>
         </div>
-        <div>
-            <a href="login.html">
+        <div class="userDropdown">
+            <a href="#" id="account-link">
                 <img class="userImage" id="account" src="res/images/me.png" alt="User image">
             </a>
+            <div id="dropdown" class="dropdown-content">
+                <span id="username">JohnDoe</span>
+                <span id="email">johndoe@example.com</span>
+                <a href="#" id="logout">Logout</a>
+            </div>
         </div>
     </header>
 
-</body>
-<br />
- <div class="form-container">
-    <form action="./index.html" method="get" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="postContent">Post Content:</label>
-            <textarea id="postContent" name="postContent" rows="4" required placeholder="textarea"></textarea>
-        </div>
+    <div class="form-container">
+        <form action="./index.html" method="get" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="postContent">Post Content:</label>
+                <textarea id="postContent" name="postContent" rows="4" required placeholder="textarea"></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="fileUpload">Select file:</label>
-            <label class="custom-file-upload">
-                Choose file
-                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
-            </label>
-        </div>
+            <div class="form-group">
+                <label for="fileUpload">Select file:</label>
+                <label class="custom-file-upload">
+                    Choose file
+                    <input type="file" id="fileUpload" name="fileUpload" accept=".jpg, .jpeg, .png, .pdf">
+                </label>
+            </div>
 
-        <input type="submit" value="Submit Post">
-    </form>
+            <input type="submit" value="Submit Post">
+        </form>
     </div>
+
+    <footer></footer>
+
+    <!-- Include your external JavaScript file here -->
+    <script src="src/script.js"></script>
+</body>
 </html>
