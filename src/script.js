@@ -100,7 +100,7 @@ async function loadJSON(){
                 let userimage  = document.createElement("img");
                 headerdiv.appendChild(userimage);
                 userimage.className = 'userImage';
-                userimage.src = 'res/images/me.png';
+                userimage.src = './res/images/me.png';
                 
                 let date = document.createElement("h2");
                 headerdiv.appendChild(date)
