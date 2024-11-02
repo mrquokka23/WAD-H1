@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //     })
 // });
 
-const LOCAL_JSON_PATH = "WAD-H1/res/json/myjson.json";
+const LOCAL_JSON_PATH = "/res/json/myjson.json";
 
 fetch(LOCAL_JSON_PATH)
     .then((response) => response.json())
