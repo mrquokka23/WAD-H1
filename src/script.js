@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'https://api.jsonbin.io/v3/b/672603d9acd3cb34a8a13c3d'
+const API_ENDPOINT = 'https://api.jsonbin.io/v3/b/672603d9acd3cb34a8a13c3d';
 
 document.addEventListener('DOMContentLoaded', function () {
     const accountLink = document.getElementById('account-link');
@@ -16,14 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.style.display = 'none';
         }
     });
+    loadJSON();
+});
+    
 
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Access-Key' : '$2a$10$fDUywYuTxjBWIvJFfIp3Ju1ProrL2WD2eBwqnxitpklK0kuq9uWZy'
-        }
-    };
+    // const options = {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-Access-Key' : '$2a$10$fDUywYuTxjBWIvJFfIp3Ju1ProrL2WD2eBwqnxitpklK0kuq9uWZy'
+    //     }
+    // };
 
 //     fetch(API_ENDPOINT, options)
 //     .then((response) => response.json())
@@ -75,11 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
 //     })
 // });
 
-const LOCAL_JSON_PATH = "res/json/myjson.json";
+const LOCAL_JSON_PATH = "WAD-H1/res/json/myjson.json";
 
-fetch(LOCAL_JSON_PATH)
-    .then((response) => response.json())
-    .then(json => {
+//Potentially fixes the problem where github pages does not load
+async function loadJSON(){
+    try{
+        const response = await fetch(LOCAL_JSON_PATH);
+        const json = await response.json();
+
         if(window.location.pathname === '/index.html') {
             const postscontainer = document.getElementsByClassName('posts');
             console.log(postscontainer);
@@ -123,9 +129,12 @@ fetch(LOCAL_JSON_PATH)
 
                 console.log(postdata.imageUrl)
             }
+    }
+
+        }catch(error){
+            console.error("Error fetching local JSON:", error)
         }
-    })
-});
+    }
 
 
 
