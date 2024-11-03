@@ -76,7 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const LOCAL_JSON_PATH = "./res/json/myjson.json";
 
-//Potentially fixes the problem where github pages does not load
+// At the moment it loads on github pages and not locally
+// Implementation idea: 
+// https://stackoverflow.com/questions/7346563/loading-local-json-file
+// Possible to use this kind of logic as well: 
+// fetch(LOCAL_JSON_PATH)
+//.then(response => response.json())
+//.then(json => console.log(json));
+
 async function loadJSON() {
     try {
         const response = await fetch(LOCAL_JSON_PATH);
