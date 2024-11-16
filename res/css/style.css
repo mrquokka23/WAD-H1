@@ -1,6 +1,7 @@
 
 * {
     font-family: 'Verdana';
+    box-sizing: border-box; /* added 16.11 */
 }
 
 @media (min-width: 800px) {
@@ -8,19 +9,46 @@
         margin-left: 25%;
         margin-right: 25%;
     }
+    .nav {
+        display: flex;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .main-container {
+        width: 90%;
+        margin-bottom: 10%;
+    }
+
+    form input, form button {
+        width: 80%;
+    }
+    form button {
+        width: 40%;
+    }
 }
 
 
-@media (max-width: 799px) {
+@media (max-width: 1000px) {
     .posts {
         margin-left: 10%;
         margin-right: 10%;
+    }
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
 #account:hover {
     box-shadow: 2px 2px 5px #3777bc;
 }
+section {
+    padding: 10px 15px;
+    margin: 10px;
+    display: block;
+    }
 
 header {
     height: auto;
@@ -30,6 +58,8 @@ header {
     justify-content: space-between;
     margin: 0;
     padding: 30px;
+
+
 }
 
 header div {
@@ -51,9 +81,13 @@ header div {
     width: 50px;
     border-radius: 25px;
 }
+header a{
+    font-size: 24px;
+}
 
 body {
     margin: 0;
+    
 }
 
 
@@ -82,6 +116,7 @@ body {
 }
 
 footer {
+    margin-top: auto;
     height: 100px;
     background-color: #0F172A;
 }
@@ -129,3 +164,180 @@ footer {
         width: 90vw; 
     }
 }
+.form-container > body {
+    display: grid;
+    place-items: center; 
+    height: 100vh; 
+    margin: 0; 
+}
+.centered-class {
+    background-color: lightgrey; 
+    padding: 10px; 
+    border-radius: 5px; 
+    
+}
+
+.form-container {
+    background-color: #D9D9D9; 
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-sizing: border-box; 
+    margin: 20px auto;
+    width: 80%; /* Reduced margins to center it */
+    flex: 1; /* Take the remaining space */
+    /*position: relative;
+    top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: left;*/
+    }
+
+.form-group {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 15px; 
+}
+
+.form-group label {
+    width: 150px; 
+    margin-right: 10px; 
+    position: relative;
+}
+
+textarea {
+    width: 100%; 
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    resize: none; 
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #646174; 
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #455c62;
+}
+
+input[type="file"] {
+    display: none; 
+}
+
+input[type="submit"] {
+    width: 100%; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    background-color: #092747; 
+    color: white; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+input[type="submit"]:hover {
+    background-color: #34495e; 
+}
+
+.centered-class {
+    background-color: lightgrey; 
+    padding: 10px; 
+    border-radius: 5px; 
+    
+}
+
+.main-container{
+    background-color: #D9D9D9; 
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
+    /*box-sizing: border-box; 
+    position: relative;
+    top: 20px;
+    margin: 20px auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    max-height: min-content;
+    text-align: center;*/
+}
+
+form main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+form input{
+    width: 50%;
+    height: 50px;
+    border: none;
+    background-color: whitesmoke;
+    /*border: 2px solid black;*/
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 80%; 
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    resize: none; 
+}
+
+form button{
+    /*font-size: large;
+    width: 35%;
+    height: 30px;
+    border: none;
+    background-color: #42adf5;
+    border: 2px solid black;
+    border-radius: 10px;*/
+    width: 80%; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    background-color:  #092747; 
+    color: white; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+form button:hover{
+    background-color: #34495e;
+    color: white;
+}
+.main-container a{
+    color:#2f6ead; 
+    text-decoration: none; 
+    transition: color 0.3s ease;    
+}
+
+.main-container a:hover {
+    color:cornflowerblue;
+}
+p{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+h1 + *  + p {
+    font-style: italic;
+}
+
+h1 ~ p {
+    color: darkslategrey;
+}
+
+
+
+

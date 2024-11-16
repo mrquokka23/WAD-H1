@@ -1,5 +1,5 @@
 * {
-    font-family: Arial, sans-serif;
+    font-family: Verdana;
     box-sizing: border-box;
     /*
        CSS comment
@@ -30,10 +30,10 @@ a {
      */
     }
 
-.logo {
+/*.logo {
     margin: 0;
     font-size: 1.1em;
-      }
+      } */
 
 section {
     padding: 10px 15px;
@@ -41,16 +41,39 @@ section {
     display: block;
         }
 .header {
+    height: auto;
+    display: flex;
+    font-size: 24px;
+    background-color: #0F172A;
+    justify-content: space-between;
+    margin: 0;
+    padding: 30px;
+
     padding-top: .5em;
     padding-bottom: .5em;
     border: 1px solid #646174;
-    background-color: #a2ccea;
+    background-color:#0F172A;
     box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
     position: sticky;
     width: 100%;
-
     border-radius: 5px;
+
+
 }
+header div {
+    display: flex;
+    align-items: center;
+}
+
+.headerDiv > a {
+    margin: 20px;
+    color: white;
+    text-decoration: none;
+}
+.headerDiv a:hover {
+    background-color: #3777bc;
+}
+
 .nav {
     margin-top: 5px;
      }
@@ -87,9 +110,10 @@ section {
     }
 }
 body {
-    font-family: Arial, sans-serif; /* Font styling */
-    background-color: #f0f0f0; /* Light gray background */
-    margin: 0; /* Remove default margin */
+    margin: 0;
+    line-height: 1.6; /*added 16.11 */
+    font-family: Verdana; /* Font styling */
+    background-color: #D9D9D9; /* Light gray background */
     padding: 0; /* Remove default padding */
 }
 
@@ -109,9 +133,14 @@ h1 {
     margin: 0 0 20px; /* Margin for the heading */
 }
 
-.create-account {
-    margin: 10px 0; /* Margin for create account text */
+h1 + *  + p {
+    font-style: italic;
 }
+
+h1 ~ p {
+    color: darkslategrey;
+} 
+
 
 .form-group {
     margin: 15px 0; /* Space between form fields */
