@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework</title>
+    <link rel="stylesheet" href="res/css/style.css">
+    <link rel="icon" href="res/images/Favicon.ico">
+</head>
+
+<body>
+    <header>
+        <div class="headerDiv">
+            <a href="index.html">Home</a>
+            <a href="addPost.html">Add Post</a>
+            <a href="login.html">Log in</a>
+        </div>
+        <div class="userDropdown">
+            <a href="#" id="account-link">
+                <img class="userImage" id="account" src="res/images/me.png" alt="User image">
+            </a>
+            <div id="dropdown" class="dropdown-content">
+                <span id="username">John Doe</span>
+                <span id="email">john.doe@ut.ee</span>
+                <a href="#" id="logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    <div class="posts">
+        {{posts}}
+    </div>
+    <footer></footer>
+    <script src="src/script.js"></script>
+</body>
+
+</html>
