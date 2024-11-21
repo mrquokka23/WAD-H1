@@ -1,22 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <HeaderComponent />
+    <router-view />
+    <FooterComponent />
 </template>
+
+<script>
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+
+export default {
+    name: 'RootPage',
+    components: {
+        HeaderComponent,
+        FooterComponent
+    }
+}
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
+
 
 * {
     font-family: 'Verdana';
+    box-sizing: border-box;
+    /* added 16.11 */
 }
 
 @media (min-width: 800px) {
@@ -24,21 +38,144 @@
         margin-left: 25%;
         margin-right: 25%;
     }
+
+    .nav {
+        display: flex;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-container {
+        width: 90%;
+        margin-bottom: 10%;
+    }
+
+    form input,
+    form button {
+        width: 80%;
+    }
+
+    form button {
+        width: 40%;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        background-color: white;
+        width: auto;
+        max-width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        right: 0;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        font-size: calc(0.45em + 0.35vw);
+        min-width: auto;
+        height: auto;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 8px;
+        overflow-wrap: break-word;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .dropdown-content span,
+    .dropdown-content a {
+        display: block;
+        padding: 8px;
+        color: black;
+        text-decoration: none;
+    }
 }
 
 
-@media (max-width: 799px) {
+@media (max-width: 1000px) {
     .posts {
         margin-left: 10%;
         margin-right: 10%;
     }
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header-link {
+        font-size: 50px !important;
+    }
+
+    header .userImage {
+        height: 100px !important;
+        width: 100px !important;
+        border-radius: 50px !important;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        background-color: white;
+        width: auto;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        right: 0;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        font-size: 50px;
+        min-width: auto;
+        height: auto;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 8px;
+        overflow-wrap: break-word;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .dropdown-content span,
+    .dropdown-content a {
+        display: block;
+        padding: 20px;
+        color: black;
+        text-decoration: none;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .dropdown-content {
+        width: 90vw;
+    }
+}
+
+.userDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content a:hover {
+    background-color: #D9D9D9;
+    border-radius: 5px;
 }
 
 #account:hover {
     box-shadow: 2px 2px 5px #3777bc;
 }
 
-header {
+section {
+    padding: 10px 15px;
+    margin: 10px;
+    display: block;
+}
+
+header nav {
     height: auto;
     display: flex;
     font-size: 24px;
@@ -46,19 +183,25 @@ header {
     justify-content: space-between;
     margin: 0;
     padding: 30px;
+    align-items: center;
+
+
 }
 
 header div {
     display: flex;
     align-items: center;
+
 }
 
-.headerDiv > a {
+.header-link {
     margin: 20px;
     color: white;
     text-decoration: none;
+    font-size: 24px;
 }
-.headerDiv a:hover {
+
+.header-link:hover {
     background-color: #3777bc;
 }
 
@@ -82,80 +225,225 @@ body {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-.postHeader ~ p {
+
+.postHeader~p {
     font-size: 20px;
 }
+
 .postHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .postHeader+img {
     border-radius: 20px;
 }
 
 .postText {
-  text-align: start;
+    margin-top: 15px;
+    text-align: start;
 }
 
 .likeDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .like {
     width: 20px;
-    height: 20px;
 }
 
 footer {
+    margin-top: auto;
     height: 100px;
     background-color: #0F172A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.userDropdown {
-    position: relative; 
-    display: inline-block;
+
+.form-container>body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.dropdown-content {
-    display: none; 
-    position: absolute;
-    background-color: white; 
-    width: auto; 
-    max-width: 300px; 
+.centered-class {
+    background-color: lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.form-container {
+    background-color: #D9D9D9;
+    padding: 50px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; 
-    right: 0; 
-    margin-top: 8px; 
-    border: 1px solid #ddd; 
-    font-size: calc(0.45em + 0.35vw); 
-    min-width: auto; 
-    height: auto; 
-    max-height: 60vh; 
-    overflow-y: auto; 
-    padding: 8px; 
-    overflow-wrap: break-word; 
+    box-sizing: border-box;
+    margin: 20px auto;
+    width: 80%;
+    /* Reduced margins to center it */
+    flex: 1;
+    /* Take the remaining space */
+    /*position: relative;
+    top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: left;*/
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 150px;
+    margin-right: 10px;
+    position: relative;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #646174;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #455c62;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #092747;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #34495e;
+}
+
+.centered-class {
+    background-color: lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.main-container {
+    background-color: #D9D9D9;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
+    /*box-sizing: border-box; 
+    position: relative;
+    top: 20px;
+    margin: 20px auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    max-height: min-content;
+    text-align: center;*/
+}
+
+form main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+form input {
+    width: 50%;
+    height: 50px;
+    border: none;
+    background-color: whitesmoke;
+    /*border: 2px solid black;*/
     border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 80%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    resize: none;
 }
 
-.dropdown-content span,
-.dropdown-content a {
-    display: block;
-    padding: 8px; 
-    color: black; 
-    text-decoration: none; 
+form button {
+    /*font-size: large;
+    width: 35%;
+    height: 30px;
+    border: none;
+    background-color: #42adf5;
+    border: 2px solid black;
+    border-radius: 10px;*/
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #092747;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1; 
+form button:hover {
+    background-color: #34495e;
+    color: white;
 }
 
-@media (max-width: 600px) {
-    .dropdown-content {
-        width: 90vw; 
-    }
+.main-container a {
+    color: #2f6ead;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.main-container a:hover {
+    color: cornflowerblue;
+}
+
+p {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+h1+*+p {
+    font-style: italic;
+}
+
+h1~p {
+    color: darkslategrey;
 }
 </style>
