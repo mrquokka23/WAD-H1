@@ -43,7 +43,8 @@ export default {
         display: flex;
     }
 
-    .header {
+    header {
+        min-height: 20vh;
         flex-direction: column;
         align-items: flex-start;
     }
@@ -102,6 +103,7 @@ export default {
     }
 
     header {
+        min-height: 20vh;
         flex-direction: row;
         justify-content: space-between;
     }
@@ -258,9 +260,9 @@ body {
 
 footer {
     margin-top: auto;
-    height: 100px;
+    min-height: 10vh;
     background-color: #0F172A;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }

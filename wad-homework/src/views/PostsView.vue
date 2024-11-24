@@ -41,5 +41,6 @@ export default {
 
 .removeLikes:hover {
   background-color: #334155;
+  cursor: pointer;
 }
 </style>
