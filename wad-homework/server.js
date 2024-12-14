@@ -1,37 +1,48 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./database');
+const pool = require('./database'); // Your database connection file
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
-const port = process.env.PORT || 3000;
 
+const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8080', credentials: true })); //very important, don't forget
-// We need to include "credentials: true" to allow cookies to be represented  
-// Also "credentials: 'include'" need to be added in Fetch API in the Vue.js App
+app.use(cors({ origin: 'http://localhost:8080', credentials: true })); // Enable CORS for your frontend
+app.use(express.json()); // Parses incoming JSON requests
+app.use(cookieParser()); // Parses cookies from the request
 
-app.use(express.json()); // Parses incoming requests with JSON payloads and is based on body-parser.
-app.use(cookieParser()); // Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
-app.use(bodyParser.json());
-
-const secret = "gdgdhdbcb770785rgdzqws"; // use a stronger secret
-const maxAge = 60 * 60; //unlike cookies, the expiresIn in jwt token is calculated by seconds not milliseconds
+const secret = "gdgdhdbcb770785rgdzqws"; // Use a stronger secret in production
+const maxAge = 60 * 60; // Token expiration time in seconds
 
 const generateJWT = (id) => {
-    return jwt.sign({ id }, secret, { expiresIn: maxAge })
-        //jwt.sign(payload, secret, [options, callback]), and it returns the JWT as string
-}
+    return jwt.sign({ id }, secret, { expiresIn: maxAge });
+};
+
+// Middleware to authenticate JWT
+const authenticateJWT = (req, res, next) => {
+    const token = req.cookies.jwt; // Retrieve token from cookies
+    if (token) {
+        jwt.verify(token, secret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403); // Forbidden if token is invalid
+            }
+            req.user = user; // Attach user info to the request
+            next(); // Proceed to the next middleware or route handler
+        });
+    } else {
+        res.sendStatus(401); // Unauthorized if no token is provided
+    }
+};
 
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });
 
 // Get all posts
-app.get('/api/posts', async (req, res) => {
+app.get('/api/posts', authenticateJWT, async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM posts ORDER BY created_at DESC');
         res.status(200).json(result.rows);
@@ -42,7 +53,7 @@ app.get('/api/posts', async (req, res) => {
 });
 
 // Get post by ID
-app.get('/api/posts/:id', async (req, res) => {
+app.get('/api/posts/:id', authenticateJWT, async (req, res) => {
     const { id } = req.params;
     try {
         const result = await pool.query('SELECT * FROM posts WHERE id = $1', [id]);
@@ -58,7 +69,7 @@ app.get('/api/posts/:id', async (req, res) => {
 });
 
 // Create a new post
-app.post('/api/posts', async (req, res) => {
+app.post('/api/posts', authenticateJWT, async (req, res) => {
     const { username, content, image_url } = req.body;
     try {
         const result = await pool.query(
@@ -73,7 +84,7 @@ app.post('/api/posts', async (req, res) => {
 });
 
 // Update a post
-app.put('/api/posts/:id', async (req, res) => {
+app.put('/api/posts/:id', authenticateJWT, async (req, res) => {
     const { id } = req.params;
     const { content, image_url } = req.body;
     try {
@@ -93,7 +104,7 @@ app.put('/api/posts/:id', async (req, res) => {
 });
 
 // Delete a post
-app.delete('/api/posts/:id', async (req, res) => {
+app.delete('/api/posts/:id', authenticateJWT, async (req, res) => {
     const { id } = req.params;
     try {
         const result = await pool.query('DELETE FROM posts WHERE id = $1 RETURNING *', [id]);
@@ -108,6 +119,7 @@ app.delete('/api/posts/:id', async (req, res) => {
     }
 });
 
+// User registration
 app.post('/auth/register', async (req, res) => {
     try {
         console.log("A signup request has arrived");
@@ -123,20 +135,21 @@ app.post('/auth/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const authUser = await pool.query(
-            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", [email, hashedPassword]
+            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", 
+            [email, hashedPassword]
         );
 
         const token = await generateJWT(authUser.rows[0].id);
-        res
-            .status(201)
+        res.status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: authUser.rows[0].id }); // Remove .send for proper response
+            .json({ user_id: authUser.rows[0].id });
     } catch (err) {
         console.error(err.message);
         res.status(400).send(err.message);
     }
 });
 
+// User login
 app.post('/auth/login', async (req, res) => {
     try {
         console.log("A login request has arrived");
@@ -153,13 +166,12 @@ app.post('/auth/login', async (req, res) => {
         }
 
         const token = await generateJWT(user.rows[0].id);
-        res
-            .status(200) // Changed to 200 since login is successful
+        res.status(200)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: user.rows[0].id }); // Remove .send for proper response
+            .json({ user_id: user.rows[0].id });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: error.message }); // Changed to 500 for internal server error, if occurs
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -169,8 +181,4 @@ app.get('/auth/logout', (req, res) => {
         .status(200) // Returning success on logout
         .clearCookie('jwt')
         .json({ msg: "Cookie cleared" }); // Remove .send for proper response
-});
-
-app.listen(port, () => {
-    console.log("Server is listening to port " + port)
 });
