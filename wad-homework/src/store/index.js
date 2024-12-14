@@ -172,6 +172,9 @@ export default createStore({
       }
     },
     mutations: {
+      SET_POSTS(state,postId){
+        state.posts = posts;
+      },
       INCREMENT_LIKE(state, postId) {
         const post = state.posts.find(p => p.id === postId);
         if(post){
@@ -185,6 +188,21 @@ export default createStore({
       }
     },
     actions: {
+      async fetchPosts({commit}){
+        try{
+          const response = await fetch("http://localhost:3000/api/posts",{
+            credentials: 'include' //cookies -> sent to authentication
+          });
+          if(!response){
+            throw new Error("Failed to fetch posts. Are you authenticated?");
+          }
+          const data =  await response.json();
+          commit('SET_POSTS', data);
+        }
+        catch(error){
+          console.error(error.message);
+        }
+      },
       addLike({commit}, postId) {
         commit('INCREMENT_LIKE', postId);
       },

@@ -1,18 +1,14 @@
 <template>
     <div class="main-content">
         <div class="login-content">
-            <h1>Login Page</h1>
+            <h1>Sign up Page</h1>
             <form @submit.prevent="handleSubmit"> <!--triggers when form is submitted -->
                 <input type="email" v-model="email" placeholder="Email" required /><br />
                 <input type="password" v-model="password" placeholder="Password" required
                     @input="validatePassword" /><br />
                 <!-- password triggers validatepassword() 
                     and gives errors to errorMessages if the condition is not met-->
-                    <div class="button-row">
-                        <button type="submit" class="submit-button">Login</button>
-                        <span class="or-text">Or</span>
-                        <button type="button" class="submit-button" @click="$router.push('/signUp')">Signup</button>
-                    </div>
+                <button type="submit">Sign Up</button><br />
                 <div v-if="errorMessages.length" class="error-messages">
                     <p>The password is not valid:</p>
                     <ul>
@@ -26,7 +22,7 @@
 
 <script>
 export default {
-    name: 'LoginPage',
+    name: 'SignUp',
     data() {
         return {
             email: '',
@@ -73,10 +69,11 @@ export default {
 
 
         },
-        handleSubmit() {
+        handleSubmit(e) {
             this.validatePassword();
             if (this.errorMessages.length == 0) {
-                fetch("http://localhost:3000/auth/login", {
+            
+                fetch("http://localhost:3000/auth/register", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -90,19 +87,27 @@ export default {
                     }
                     return response.json();
                 })
-                .then(data => {
-                    alert('Login Successful');
+                .then(data => 
+                {
+                    alert('Sign Up was successful');
                     this.email = '';
                     this.password = '';
-                    this.$router.push('/'); //redirect main page
-                })
-                .catch(error => {
-                    alert(error.message);
-                })
+                    this.$router.push('/login'); //redirect to login page
+                }
+                )
+                .catch(error =>
+                    {
+                        alert(error.message);
+                    }
+                )
+
+                
+                
             }
             else {
                 alert('Fix the errors in password')
             }
+            
         }
     }
 }
@@ -150,14 +155,6 @@ form {
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-.button-row {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-.or-text {
-    margin: 0 10px;
 }
 /* Add styles for the login page if needed */
 </style>

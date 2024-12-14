@@ -24,6 +24,23 @@ export default {
   },
   methods: {
     ...mapActions(['removeLikes'])
+  },
+  mounted(){
+    fetch("http://localhost:3000/auth/authenticate",{
+      credentials: 'include'
+    })
+    .then(response => {
+      if(!response.ok){
+        throw new Error('Not Authenticated')
+      }
+      return response.json();
+    })
+    .then(data => {
+      this.fetchPosts();
+    })
+    .catch(error =>{
+      this.$router.push('/login'); //not authenticated -> redirect to login
+    })
   }
 }
 </script>

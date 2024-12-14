@@ -4,15 +4,15 @@
             <div>
                 <router-link class="header-link" to="/">Home</router-link>
                 <router-link class="header-link" to="/login">Log in</router-link>
+                <router-link class="header-link" to="/signUp">Sign Up</router-link>
             </div>
             <div class="userDropdown" @click="toggleDropdown">
                 <a href="#" id="account-link">
                     <img class="userImage" src="../assets/me.png" alt="User image">
                 </a>
                 <div v-show="isDropdownVisible" id="dropdown" class="dropdown-content">
-                    <span id="username">John Doe</span>
-                    <span id="email">john.doe@ut.ee</span>
-                    <a href="#" id="logout">Logout</a>
+                    <span id="email">{{ email }}</span>
+                    <a href="#" id="logout" @click.prevent="logout">Logout</a>
                 </div>
             </div>
         </nav>
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             isDropdownVisible: false,
+            email: '',
         };
     },
     methods: {
@@ -40,7 +41,42 @@ export default {
             if (dropdown && !dropdown.contains(event.target) && !accountLink.contains(event.target)) {
                 this.isDropdownVisible = false;
             }
-        }
+        },
+        logout(){
+            fetch('http://localhost:3000/auth/logout',{
+                credentials: 'include'
+            })
+            .then(response => {
+                if(response.ok){
+                    this.email = '';
+                    this.username = '';
+                    this.$router.push('/login');
+                } else{
+                    alert('Logout not successful')
+                }
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+                alert('Error occured while logging out');
+            });
+        },
+        userDataFetching(){
+            fetch("http://localhost:3000/auth/user",{
+                credentials: 'include'
+            })
+            .then(response => {
+                if(!response.ok){
+                    throw new Error('Not authenticated');
+            }
+            return response.json();
+            })
+            .then(data => {
+                this.email = data.email;
+                this.username = data.username;
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
     },
     mounted() {
 
@@ -49,7 +85,7 @@ export default {
     beforeDestroy() {
         window.removeEventListener('click', this.handleClickOutside);
     }
-}
+}}
 </script>
 
 <style scoped>

@@ -37,6 +37,20 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
+//not sure how to use upper code, if its better delete the one below:
+app.get('/auth/authenticate', (req,res) => {
+    const token = req.cookies.jwt;
+    if(!token){
+        return res.status(401).json({error:"no token"});
+    }
+    jwt.verify(token,secret,(error,decoded) => {
+        if(error){
+            return res.status(401).json({error:"invalid token"});
+        }
+        res.status(200).json({message: "Authenticated",user_id: decoded.id})
+    })
+})
+
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });
