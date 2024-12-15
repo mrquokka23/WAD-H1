@@ -2,6 +2,10 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    user: {
+      authenticated: false,
+      email: null
+    },
     posts: 
       [
         {
@@ -185,6 +189,13 @@ export default createStore({
         state.posts.forEach(post => {
           post.like_count = 0;
         });
+      }, 
+      SET_AUTHENTICATED(state, status) {
+        state.user.authenticated = status;
+      },
+      UPDATE_USER(state, email, id) {
+        state.user.email = email;
+        state.user.id = id;
       }
     },
     actions: {
@@ -208,6 +219,12 @@ export default createStore({
       },
       removeLikes({commit}) {
         commit('REMOVE_LIKES');
+      },
+      updateUserState({commit}, userAuthenticated) {
+        commit('SET_AUTHENTICATED', userAuthenticated);
+      },
+      updateUser({commit}, email) {
+        commit('UPDATE_USER', email);
       }
     },
     modules: {

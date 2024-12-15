@@ -3,8 +3,7 @@
         <nav>
             <div>
                 <router-link class="header-link" to="/">Home</router-link>
-                <router-link class="header-link" to="/login">Log in</router-link>
-                <router-link class="header-link" to="/signUp">Sign Up</router-link>
+                <router-link class="header-link" to="/contact">Contact</router-link>
             </div>
             <div class="userDropdown" @click="toggleDropdown">
                 <a href="#" id="account-link">
@@ -12,6 +11,8 @@
                 </a>
                 <div v-show="isDropdownVisible" id="dropdown" class="dropdown-content">
                     <span id="email">{{ email }}</span>
+                    <router-link class="router-link" to="/login">Log in</router-link>
+                    <router-link class="router-link" to="/signUp">Sign Up</router-link>
                     <a href="#" id="logout" @click.prevent="logout">Logout</a>
                 </div>
             </div>
@@ -42,50 +43,51 @@ export default {
                 this.isDropdownVisible = false;
             }
         },
-        logout(){
-            fetch('http://localhost:3000/auth/logout',{
+        logout() {
+            fetch('http://localhost:3000/auth/logout', {
                 credentials: 'include'
             })
-            .then(response => {
-                if(response.ok){
-                    this.email = '';
-                    this.username = '';
-                    this.$router.push('/login');
-                } else{
-                    alert('Logout not successful')
-                }
-            })
-            .catch(error => {
-                console.error('Error logging out:', error);
-                alert('Error occured while logging out');
-            });
+                .then(response => {
+                    if (response.ok) {
+                        this.email = '';
+                        this.username = '';
+                        this.$router.push('/login');
+                    } else {
+                        alert('Logout not successful')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error logging out:', error);
+                    alert('Error occured while logging out');
+                });
         },
-        userDataFetching(){
-            fetch("http://localhost:3000/auth/user",{
+        userDataFetching() {
+            fetch("http://localhost:3000/auth/user", {
                 credentials: 'include'
             })
-            .then(response => {
-                if(!response.ok){
-                    throw new Error('Not authenticated');
-            }
-            return response.json();
-            })
-            .then(data => {
-                this.email = data.email;
-                this.username = data.username;
-            })
-            .catch(error => {
-                console.log(error.message);
-            });
-    },
-    mounted() {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Not authenticated');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    this.email = data.email;
+                    this.username = data.username;
+                })
+                .catch(error => {
+                    console.log(error.message);
+                });
+        },
+        mounted() {
 
-        window.addEventListener('click', this.handleClickOutside);
-    },
-    beforeDestroy() {
-        window.removeEventListener('click', this.handleClickOutside);
+            window.addEventListener('click', this.handleClickOutside);
+        },
+        beforeDestroy() {
+            window.removeEventListener('click', this.handleClickOutside);
+        }
     }
-}}
+}
 </script>
 
 <style scoped>

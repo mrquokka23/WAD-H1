@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
     user: "postgres",
-    password: "", // add your password
+    password: "Homework", // add your password
     database: "HW_AM",
     host: "localhost",
     port: "5432"
@@ -31,13 +31,17 @@ const createTblQuery1 = `
 const createTblQuery2 = `
     CREATE TABLE IF NOT EXISTS "posts" (
         id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        userid uuid NOT NULL,                                -- Assuming you want a UUID foreign key
+        userid TEXT NOT NULL,                                
         content TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        image_url VARCHAR(255),
-        FOREIGN KEY (userid) REFERENCES users(id)            -- Add foreign key constraint if necessary
+        image_url VARCHAR(255)
     );`;
 
+execute(createTblQuery1).then(result => {
+    if (result) {
+        console.log('Table "users" is created');
+    }
+});
 execute(createTblQuery2).then(result => {
     if (result) {
         console.log('Table "posts" is created');

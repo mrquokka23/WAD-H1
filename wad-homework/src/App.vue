@@ -37,6 +37,7 @@ export default {
     .posts {
         margin-left: 25%;
         margin-right: 25%;
+        min-height: 70vh;
     }
 
     .nav {
@@ -67,19 +68,18 @@ export default {
         position: absolute;
         background-color: white;
         width: auto;
-        max-width: 300px;
+        max-width: 500px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         right: 0;
         margin-top: 8px;
         border: 1px solid #ddd;
         font-size: calc(0.45em + 0.35vw);
-        min-width: auto;
+        min-width: 400px;
         height: auto;
         max-height: 60vh;
         overflow-y: auto;
         padding: 8px;
-        overflow-wrap: break-word;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -87,19 +87,24 @@ export default {
     }
 
     .dropdown-content span,
-    .dropdown-content a {
+    .dropdown-content a{
         display: block;
         padding: 8px;
         color: black;
         text-decoration: none;
     }
+
+    .router-link {
+        font-size: 5px !important;
+    }
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
     .posts {
         margin-left: 10%;
         margin-right: 10%;
+        min-height: 70vh;
     }
 
     header {
@@ -128,13 +133,12 @@ export default {
         right: 0;
         margin-top: 20px;
         border: 1px solid #ddd;
-        font-size: 50px;
+        font-size: calc(0.45em + 0.35vw);
         min-width: auto;
         height: auto;
         max-height: 60vh;
         overflow-y: auto;
         padding: 8px;
-        overflow-wrap: break-word;
         border-radius: 30px;
         display: flex;
         flex-direction: column;
@@ -148,6 +152,7 @@ export default {
         color: black;
         text-decoration: none;
     }
+    
 
 }
 

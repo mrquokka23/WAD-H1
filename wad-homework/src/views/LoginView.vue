@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import store from '@/store';
+
 export default {
     name: 'LoginPage',
     data() {
@@ -92,6 +94,7 @@ export default {
                 })
                 .then(data => {
                     alert('Login Successful');
+                    store.dispatch('updateUser', this.email)
                     this.email = '';
                     this.password = '';
                     this.$router.push('/'); //redirect main page

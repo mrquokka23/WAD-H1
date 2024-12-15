@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8080', credentials: true })); // Enable CORS for your frontend
+app.use(cors({ origin: 'http://localhost:8081', credentials: true })); // Enable CORS for your frontend
 app.use(express.json()); // Parses incoming JSON requests
 app.use(cookieParser()); // Parses cookies from the request
 
@@ -24,6 +24,7 @@ const generateJWT = (id) => {
 // Middleware to authenticate JWT
 const authenticateJWT = (req, res, next) => {
     const token = req.cookies.jwt; // Retrieve token from cookies
+    console.log("Token: ", token)
     if (token) {
         jwt.verify(token, secret, (err, user) => {
             if (err) {
@@ -38,7 +39,7 @@ const authenticateJWT = (req, res, next) => {
 };
 
 //not sure how to use upper code, if its better delete the one below:
-app.get('/auth/authenticate', (req,res) => {
+app.get('/auth/authenticate', (req, res) => {
     const token = req.cookies.jwt;
     if(!token){
         return res.status(401).json({error:"no token"});
@@ -72,6 +73,7 @@ app.get('/api/posts/:id', authenticateJWT, async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM posts WHERE id = $1', [id]);
         if (result.rows.length > 0) {
+            console.log(result.rows[0])
             res.status(200).json(result.rows[0]);
         } else {
             res.status(404).json({ error: 'Post not found' });
@@ -84,11 +86,12 @@ app.get('/api/posts/:id', authenticateJWT, async (req, res) => {
 
 // Create a new post
 app.post('/api/posts', authenticateJWT, async (req, res) => {
-    const { username, content, image_url } = req.body;
+    const { email, content, image_url } = req.body;
+    console.log("EMAIL: ", email);
     try {
         const result = await pool.query(
-            'INSERT INTO posts (username, content, image_url) VALUES ($1, $2, $3) RETURNING *',
-            [username, content, image_url]
+            'INSERT INTO posts (userid, content, image_url) VALUES ($1, $2, $3) RETURNING *',
+            [email, content, image_url]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -138,7 +141,8 @@ app.post('/auth/register', async (req, res) => {
     try {
         console.log("A signup request has arrived");
         const { email, password } = req.body;
-
+        console.log("Email: ", email);
+        console.log("Password: ", password);
         // Check if the user already exists
         const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (userExists.rows.length > 0) {
